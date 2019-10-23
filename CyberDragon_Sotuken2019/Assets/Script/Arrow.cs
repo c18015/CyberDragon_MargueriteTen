@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     Rigidbody Arrow_Rig;　　　　　　　//オブジェクトのリジットボディを取る
-    public float speed =  0;　　　　　//矢の弾速、
+    public float speed = 0;　　　　　//矢の弾速、
     public GameObject effect = null;  //エフェクトを入れる箱、プレファブ化すると消えるので多分意味ない
     private AudioSource[] sources;    //SE
     public bool TransPos = true;　　　//矢を定位置に置く
@@ -51,9 +51,7 @@ public class Arrow : MonoBehaviour
         float Power = speed * 2000f;
         Arrow_Rig.AddForce(transform.forward * Power, ForceMode.Force);
         sources[0].Play();
-        Debug.Log(Power);
-        
-
+        //Debug.Log(Power);
     }
 
 
@@ -62,6 +60,4 @@ public class Arrow : MonoBehaviour
         Instantiate(effect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
-
-
 }
