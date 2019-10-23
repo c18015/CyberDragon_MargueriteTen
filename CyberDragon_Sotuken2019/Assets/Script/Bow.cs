@@ -28,12 +28,7 @@ public class Bow : MonoBehaviour
             ArrowInst = false;
         }
 
-        if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
-        {
-            ArrowInst = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
+        if (OVRInput.GetUp(OVRInput.RawButton.RIndexTrigger))
         {
             ArrowInst = true;
         }
@@ -46,19 +41,15 @@ public class Bow : MonoBehaviour
             Debug.Log("OnCollideeeeeeeeeer!!!!");
         }*/
 
-        if (collider.gameObject.tag == "Hand" && OVRInput.Get(OVRInput.RawButton.LIndexTrigger))//右、もしくは左人差し指トリガーを押した時
+        if (collider.gameObject.tag == "LHand" && OVRInput.Get(OVRInput.RawButton.LIndexTrigger))//右、もしくは左人差し指トリガーを押した時
         {
             transform.position = L_HandPos.position;
             transform.rotation = L_HandPos.rotation;//Quaternion.Euler(HandPos.rotation.x, -90 ,HandPos.rotation.z);
-
-
-            
-
         }
 
-        if (collider.gameObject.tag == "Arrow")
+        if (collider.gameObject.tag == "RHand" && OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
         {
-
+            ArrowInst = true;
         }
     }
 
