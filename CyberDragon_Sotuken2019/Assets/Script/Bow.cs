@@ -7,6 +7,7 @@ public class Bow : MonoBehaviour
     public GameObject Arrow = null;
     public Transform L_HandPos = null;
     public Vector3 MyVelocity;
+    public float CoolTime;
 
 
     bool ArrowInst = false;
@@ -14,23 +15,23 @@ public class Bow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame     collider.gameObject.tag == "Hand" && OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) || 
     void Update()
     {
-       
 
+        
         if (ArrowInst)
         {
+            CoolTime = 0;
             ArrowInstantiate();
-            ArrowInst = false;
+            
         }
 
         if (OVRInput.GetUp(OVRInput.RawButton.RIndexTrigger))
         {
-            ArrowInst = true;
+            ArrowInst = false;
         }
     }
 
@@ -60,7 +61,12 @@ public class Bow : MonoBehaviour
             this.transform.position,
             this.transform.rotation);
 
-        Debug.Log("矢を生み出した");
+        CoolTime += Time.deltaTime;
+        if (CoolTime <= 2f)
+        {
+            ArrowInst = false;
+        }
+            //Debug.Log("矢を生み出した");
     }
         
 }
