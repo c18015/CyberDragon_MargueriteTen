@@ -9,12 +9,14 @@ public class Arrow : MonoBehaviour
     public GameObject effect = null;  //エフェクトを入れる箱、プレファブ化すると消えるので多分意味ない
     private AudioSource[] sources;    //SE
     public bool TransPos = true;　　　//矢を定位置に置く
+    bool Lock = false;
    
     private void Start()
     {
         TransPos = true;
         Arrow_Rig = this.GetComponent<Rigidbody>();
         sources = gameObject.GetComponents<AudioSource>();
+        Lock = true;
     }
     
     void Update()
@@ -48,9 +50,15 @@ public class Arrow : MonoBehaviour
 
     void Shot_qqq()//
     {
-        float Power = speed * 2000f;
-        Arrow_Rig.AddForce(transform.forward * Power, ForceMode.Force);
-        sources[0].Play();
+        if (Lock)
+        {
+            float Power = speed * 2000f;
+            Arrow_Rig.AddForce(transform.forward * Power, ForceMode.Force);
+            sources[0].Play();
+
+            Lock = false;
+        }
+        
         //Debug.Log(Power);
     }
 
