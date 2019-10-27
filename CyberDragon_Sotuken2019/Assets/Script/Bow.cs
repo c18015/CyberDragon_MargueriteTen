@@ -8,11 +8,9 @@ public class Bow : MonoBehaviour
     public Transform L_HandPos = null;
     public Vector3 MyVelocity;
     public float CoolTime;
-
-
+    
     bool ArrowInst = false;
 
-    // Start is called before the first frame update
     void Start()
     {
     }
@@ -20,33 +18,26 @@ public class Bow : MonoBehaviour
     // Update is called once per frame     collider.gameObject.tag == "Hand" && OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) || 
     void Update()
     {
-
-        
         if (ArrowInst)
         {
             CoolTime = 0;
             ArrowInstantiate();
-            
         }
 
         if (OVRInput.GetUp(OVRInput.RawButton.RIndexTrigger))
         {
             ArrowInst = false;
         }
+
+        if (OVRInput.Get(OVRInput.RawButton.LHandTrigger))
+        {
+            transform.position = L_HandPos.position;
+            transform.rotation = L_HandPos.rotation;
+        }
     }
 
     void OnTriggerStay(Collider collider)
     {
-        /*if(collider.gameObject.tag == "Hand")
-        {
-            Debug.Log("OnCollideeeeeeeeeer!!!!");
-        }*/
-
-        if (collider.gameObject.tag == "LHand" && OVRInput.Get(OVRInput.RawButton.LIndexTrigger))//右、もしくは左人差し指トリガーを押した時
-        {
-            transform.position = L_HandPos.position;
-            transform.rotation = L_HandPos.rotation;//Quaternion.Euler(HandPos.rotation.x, -90 ,HandPos.rotation.z);
-        }
 
         if (collider.gameObject.tag == "RHand" && OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
         {
