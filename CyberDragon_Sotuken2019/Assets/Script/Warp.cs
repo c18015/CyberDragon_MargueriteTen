@@ -5,7 +5,9 @@ using UnityEngine;
 public class Warp : MonoBehaviour
 {
     private bool warp = false;
+    private bool WarpCheck = false;
     public GameObject Effect;
+    public GameObject object1;
     private const string MAIN_CAMERA_TAG_NAME = "MainCamera";
 
     // Start is called before the first frame update
@@ -17,19 +19,27 @@ public class Warp : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (warp)
+        if (WarpCheck)
         {
-            //Debug.Log("miteru");
-            Effect.SetActive(true);
-        }
-        else
-        {
-            Effect.SetActive(false);
+            if (warp)//カメラに写っている時
+            {
+                //Debug.Log("miteru");
+                Effect.SetActive(true);
+                if (OVRInput.GetDown(OVRInput.RawButton.B))
+                {
+                    object1.transform.position = this.transform.position;
+                }
+            }
+            else//カメラに写ってない時
+            {
+                Effect.SetActive(false);
+            }
         }
 
 
 
         warp = false;
+
     }
 
     private void OnWillRenderObject()
@@ -40,5 +50,26 @@ public class Warp : MonoBehaviour
             warp = true;
         }
 
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+
+        if (collider.gameObject.tag == "WarpArea")
+        {
+            WarpCheck = true;
+        }
+
+        
+
+       
+    }
+
+    private void OnTriggerStay(Collider collider)
+    {
+        if (collider.gameObject.tag == "Player")
+        {
+            WarpCheck = false;
+        }
     }
 }
