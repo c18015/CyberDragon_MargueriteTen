@@ -6,12 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    float fadeSpeed = 0.015f;     //透明度が変わるスピードを管理
+    float fadeSpeed = 0.015f;        //透明度が変わるスピードを管理
     float red, green, blue, alpha;   //パネルの色、不透明度を管理
     public bool isFadeOut = false;   //フェードイン処理の開始、完了を管理するフラグ
-    Image fadeImage;                //透明度を変更するパネルのイメージ
+    Image fadeImage;                 //透明度を変更するパネルのイメージ
 
-    // Start is called before the first frame update
     void Start()
     {
         fadeImage = GetComponent<Image>();
@@ -21,27 +20,35 @@ public class SceneController : MonoBehaviour
         alpha = fadeImage.color.a;
     }
 
-    public void OnClick()
+    /*public void OnClick()
     {
         GameObject obj = GameObject.Find("Button");
         // 指定したオブジェクトを削除
         Destroy(obj);
         isFadeOut = true;
-    }
+    }*/
+
     void Update()
     {
-        if(isFadeOut == true)
+        if (OVRInput.GetUp(OVRInput.RawButton.B))
+        {
+            GameObject obj = GameObject.Find("Button");
+            // 指定したオブジェクトを削除
+            Destroy(obj);
+            isFadeOut = true;
+        }
+        if (isFadeOut == true)
         {
             StartFadeOut();
         }
     }
     void StartFadeOut()
     {
-        fadeImage.enabled = true;  // a)パネルの表示をオンにする
-        alpha += fadeSpeed;         // b)不透明度を徐々にあげる
-        SetAlpha();               // c)変更した透明度をパネルに反映する
+        fadeImage.enabled = true; //パネルの表示をオンにする
+        alpha += fadeSpeed;       //不透明度を徐々にあげる
+        SetAlpha();               //変更した透明度をパネルに反映する
         if (alpha > 1.0f)
-        {             // d)完全に不透明になったら処理を抜ける
+        {             //完全に不透明になったら処理を抜ける
             SceneManager.LoadScene("tutorial");
         }
     }

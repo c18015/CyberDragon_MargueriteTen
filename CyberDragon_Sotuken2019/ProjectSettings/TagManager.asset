@@ -8,6 +8,7 @@ TagManager:
   - LHand
   - RHand
   - WarpArea
+  - Arrow
   layers:
   - Default
   - TransparentFX

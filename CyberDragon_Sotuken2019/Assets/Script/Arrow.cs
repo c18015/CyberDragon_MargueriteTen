@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Arrow : MonoBehaviour
 {
     Rigidbody Arrow_Rig;　　　　　　　//オブジェクトのリジットボディを取る
-    public float speed = 0;　　　　　//矢の弾速、
+    public float speed = 0;　　　　　 //矢の弾速、
     public GameObject effect = null;  //エフェクトを入れる箱、プレファブ化すると消えるので多分意味ない
     private AudioSource[] sources;    //SE
     public bool TransPos = true;　　　//矢を定位置に置く
@@ -48,7 +49,7 @@ public class Arrow : MonoBehaviour
 
     }
 
-    void Shot_qqq()//
+    void Shot_qqq()
     {
         if (Lock)
         {
@@ -63,9 +64,18 @@ public class Arrow : MonoBehaviour
     }
 
 
-    void OnCollisionEnter()//オブジェクトに当たるとエフェクト出して弾丸消滅
+    void OnCollisionEnter(Collision collision)//オブジェクトに当たるとエフェクト出して弾丸消滅
     {
+        if(collision.gameObject.name == "ChaDragon")
+        {
+            Destroy(gameObject);
+        }
+        if(collision.gameObject.name == "Cube")
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene("tutorial");
+        }
+
         Instantiate(effect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
     }
 }

@@ -13,6 +13,7 @@ public class Bow : MonoBehaviour
 
     void Start()
     {
+
     }
 
     // Update is called once per frame     collider.gameObject.tag == "Hand" && OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) || 

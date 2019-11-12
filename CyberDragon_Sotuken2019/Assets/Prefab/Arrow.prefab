@@ -88,11 +88,11 @@ GameObject:
   - component: {fileID: 6447966117130744649}
   - component: {fileID: 6447966117130744646}
   - component: {fileID: 6447966117130744647}
-  - component: {fileID: 6447966117130744644}
   - component: {fileID: 6447966117130744645}
+  - component: {fileID: 1775279681418082044}
   m_Layer: 0
   m_Name: Arrow
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,21 +143,6 @@ CapsuleCollider:
   m_Height: 1.1182361
   m_Direction: 2
   m_Center: {x: 0, y: -0.0045211315, z: 0.059118047}
---- !u!114 &6447966117130744644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6447966117130744642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 374d2c6de57ee4d43829bb6a071e31c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  effect: {fileID: 0}
-  TransPos: 0
 --- !u!82 &6447966117130744645
 AudioSource:
   m_ObjectHideFlags: 0
@@ -254,6 +239,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1775279681418082044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6447966117130744642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374d2c6de57ee4d43829bb6a071e31c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  effect: {fileID: 0}
+  TransPos: 0
 --- !u!1001 &6447966116014565840
 PrefabInstance:
   m_ObjectHideFlags: 0
