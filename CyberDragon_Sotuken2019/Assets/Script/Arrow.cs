@@ -22,6 +22,7 @@ public class Arrow : MonoBehaviour
     
     void Update()
     {
+        
         if (TransPos)//TransPosがTrueの場合、シーン上にあるArrowSetPosオブジェクト(弓オブジェクト)の位置を追従する
         {
             GameObject target1 = GameObject.Find("ArrowSetPos");
@@ -34,6 +35,8 @@ public class Arrow : MonoBehaviour
        
         if (OVRInput.GetUp(OVRInput.RawButton.RIndexTrigger))
         {
+            TransPos = false;
+
             GameObject LhandPas = GameObject.Find("LHandPos");
             GameObject RhandPas = GameObject.Find("RHandPos");
             Vector3 LHP = LhandPas.transform.position;
@@ -41,10 +44,10 @@ public class Arrow : MonoBehaviour
             speed = Vector3.Distance(LHP, RHP);　　　　　　　//左手と右手の距離を測って数値を出しSpeedにぶち込む
 
 
-            TransPos = false;　//矢オブジェクト追従をOFF
+            　//矢オブジェクト追従をOFF
             Shot_qqq(); 　   　//void Shot_qqq()を呼び出す
 
-            Destroy(this.gameObject, 30f);//30秒後にこのオブジェクトを消す
+            Destroy(this.gameObject, 10f);//10秒後にこのオブジェクトを消す
         }
 
     }
@@ -53,9 +56,10 @@ public class Arrow : MonoBehaviour
     {
         if (Lock)
         {
-            float Power = speed * 2000f;
-            Arrow_Rig.AddForce(transform.forward * Power, ForceMode.Force);
             sources[0].Play();
+            float Power = speed * 1000f;
+            Arrow_Rig.AddForce(transform.forward * Power, ForceMode.Force);
+            
 
             Lock = false;
         }
@@ -73,7 +77,7 @@ public class Arrow : MonoBehaviour
         if(collision.gameObject.name == "Cube")
         {
             Destroy(gameObject);
-            SceneManager.LoadScene("tutorial");
+            //SceneManager.LoadScene("tutorial");
         }
 
         Instantiate(effect, transform.position, Quaternion.identity);

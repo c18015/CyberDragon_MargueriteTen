@@ -13,14 +13,22 @@ public class SceneController2 : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {/*
         if (OVRInput.GetUp(OVRInput.RawButton.Y))
+        {
+            SceneManager.LoadScene("battle");
+        }*/
+    }
+
+    private void OnTriggerStay(Collider collider)
+    {
+        if (collider.gameObject.tag == "Player")
         {
             SceneManager.LoadScene("battle");
         }
     }
 
-    public void OnClick()
+        public void OnClick()
     {
         SceneManager.LoadScene("battle");
     }
