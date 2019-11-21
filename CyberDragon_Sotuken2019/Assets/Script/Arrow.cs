@@ -5,66 +5,44 @@ using UnityEngine.SceneManagement;
 
 public class Arrow : MonoBehaviour
 {
+    
     Rigidbody Arrow_Rig;　　　　　　　//オブジェクトのリジットボディを取る
-    public float speed = 0;　　　　　 //矢の弾速、
+    public float speed;　　　　　 //矢の弾速、
     public GameObject effect = null;  //エフェクトを入れる箱、プレファブ化すると消えるので多分意味ない
     private AudioSource[] sources;    //SE
-    public bool TransPos = true;　　　//矢を定位置に置く
-    bool Lock = false;
+
+
    
     private void Start()
     {
-        TransPos = true;
         Arrow_Rig = this.GetComponent<Rigidbody>();
         sources = gameObject.GetComponents<AudioSource>();
-        Lock = true;
+        sources[0].Play();
+
+        SearchPOS();
     }
     
     void Update()
     {
-        
-        if (TransPos)//TransPosがTrueの場合、シーン上にあるArrowSetPosオブジェクト(弓オブジェクト)の位置を追従する
-        {
-            GameObject target1 = GameObject.Find("ArrowSetPos");
-            Transform taget2 = target1.GetComponent<Transform>();
-            //Debug.Log(taget2);
-            transform.position = taget2.position;
-            transform.rotation = taget2.rotation;
-
-        }
        
-        if (OVRInput.GetUp(OVRInput.RawButton.RIndexTrigger))
-        {
-            TransPos = false;
-
-            GameObject LhandPas = GameObject.Find("LHandPos");
-            GameObject RhandPas = GameObject.Find("RHandPos");
-            Vector3 LHP = LhandPas.transform.position;
-            Vector3 RHP = RhandPas.transform.position;
-            speed = Vector3.Distance(LHP, RHP);　　　　　　　//左手と右手の距離を測って数値を出しSpeedにぶち込む
-
-
-            　//矢オブジェクト追従をOFF
-            Shot_qqq(); 　   　//void Shot_qqq()を呼び出す
-
-            Destroy(this.gameObject, 10f);//10秒後にこのオブジェクトを消す
-        }
-
     }
 
-    void Shot_qqq()
+    void SearchPOS()
     {
-        if (Lock)
-        {
-            sources[0].Play();
-            float Power = speed * 1000f;
-            Arrow_Rig.AddForce(transform.forward * Power, ForceMode.Force);
-            
+        GameObject LhandPas = GameObject.Find("LHandPos");
+        GameObject RhandPas = GameObject.Find("RHandPos");
+        Vector3 LHP = LhandPas.transform.position;
+        Vector3 RHP = RhandPas.transform.position;
+        speed = Vector3.Distance(LHP, RHP);
 
-            Lock = false;
-        }
-        
-        //Debug.Log(Power);
+        speed /=  3000;
+        SSS();
+    }
+
+    void SSS()
+    {
+        Arrow_Rig.AddForce(transform.forward * speed);
+        Destroy(this.gameObject, 10f);
     }
 
 
@@ -74,12 +52,5 @@ public class Arrow : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if(collision.gameObject.name == "Cube")
-        {
-            Destroy(gameObject);
-            //SceneManager.LoadScene("tutorial");
-        }
-
-        Instantiate(effect, transform.position, Quaternion.identity);
     }
 }

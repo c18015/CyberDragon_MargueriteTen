@@ -55,6 +55,7 @@ public class Warp : MonoBehaviour
         }
 
         WarpTrigger = false;
+        warp = false;
     }
 
     private void OnWillRenderObject()

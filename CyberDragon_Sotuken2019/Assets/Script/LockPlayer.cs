@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class LockPlayer : MonoBehaviour
 {
-    
+     GameObject target1;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        target1 = GameObject.Find("P_Haed");
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject target1 = GameObject.Find("TrackingSpace");
-
-        // 補完スピードを決める
-        float speed = 0.1f;
-        // ターゲット方向のベクトルを取得
-        Vector3 relativePos = target1.transform.position - this.transform.position;
+        
+     
         // 方向を、回転情報に変換
-        Quaternion rotation = Quaternion.LookRotation(relativePos);
-        // 現在の回転情報と、ターゲット方向の回転情報を補完する
-        transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, speed);
+        Quaternion rotation = Quaternion.LookRotation(target1.transform.position - this.transform.position,Vector3.up);
 
+        rotation.z = 0;
+        rotation.x = 0;
+
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 0.1f);
     }
 }

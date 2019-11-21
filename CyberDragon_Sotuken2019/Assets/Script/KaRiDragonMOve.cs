@@ -34,7 +34,7 @@ public class KaRiDragonMOve : MonoBehaviour
         {
             moveTime = MoveTime();
             targetPosition = GetRandomPosition();
-            Debug.Log(targetPosition);
+            //Debug.Log(targetPosition);
         }
     }
 
