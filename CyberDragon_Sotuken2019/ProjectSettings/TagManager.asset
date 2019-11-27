@@ -9,6 +9,8 @@ TagManager:
   - RHand
   - WarpArea
   - Arrow
+  - RHand_2
+  - OBJ
   layers:
   - Default
   - TransparentFX

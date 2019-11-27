@@ -13,6 +13,7 @@ public class Warp : MonoBehaviour
     public GameObject CheckPanel;//ワープポイントを分かりやすくするパネル
 
     float Distance;//距離
+    public float CameraDis = 20f; //カメラの描画距離   
 
     private const string MAIN_CAMERA_TAG_NAME = "MainCamera";//メインカメラ
 
@@ -33,7 +34,7 @@ public class Warp : MonoBehaviour
         //Debug.Log("Distance : " + Distance);
 
 
-        if (WarpTrigger && Distance <= 20f)//カメラに写っている時
+        if (WarpTrigger && Distance <= CameraDis)//カメラに写っている時
         {
             
             Effect.SetActive(true);
@@ -76,7 +77,7 @@ public class Warp : MonoBehaviour
             //Debug.Log("OKOKOK");
         }
 
-        if (collider.gameObject.tag == "RHand")//
+        if (collider.gameObject.tag == "RHand_2")//
         {
             //Debug.Log("OKOKOK");
             warp = true;
@@ -89,7 +90,7 @@ public class Warp : MonoBehaviour
 
     private void OnTriggerExit(Collider collider)
     {
-        if (collider.gameObject.tag == "RHand")//
+        if (collider.gameObject.tag == "RHand_2")//
         {
             CheckPanel.SetActive(false);
         }

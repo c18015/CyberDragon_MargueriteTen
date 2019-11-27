@@ -11,35 +11,40 @@ public class Bow : MonoBehaviour
     Vector3 MyVelocity;
     float CoolTime;
     public float TimeS;
+    float ArrowPower = 0f;
 
-
-    bool ArrowInst = false;
+    bool ArrowInst;
+    bool HandCheck;
 
     void Start()
     {
         KaRiArrow.SetActive(false);
+        ArrowInst = true;
+        HandCheck = false;
     }
-
-    // Update is called once per frame     collider.gameObject.tag == "Hand" && OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) || 
+    
     void Update()
     {
-        
         TimeS += Time.deltaTime;
-
-        Debug.Log("TimesS"+TimeS);
-       
         if (TimeS <= 1.0f)
         {
             ArrowInst = true;
-            Debug.Log("OOKK");
         }
         
 
-        if (ArrowInst && OVRInput.GetUp(OVRInput.RawButton.RIndexTrigger)|| ArrowInst && Input.GetKeyDown(KeyCode.A))
+        if (ArrowInst && HandCheck && OVRInput.GetUp(OVRInput.RawButton.RIndexTrigger))
         {
-            
             ArrowInstantiate();
-            
+            KaRiArrow.SetActive(false);
+            ArrowInst = false;
+            /*
+            GameObject LhandPas = GameObject.Find("LHandPos");
+            GameObject RhandPas = GameObject.Find("RHandPos");
+            Vector3 LHP = LhandPas.transform.position;
+            Vector3 RHP = RhandPas.transform.position;
+            ArrowPower = Vector3.Distance(LHP, RHP);
+
+            ArrowPower /= 3000f;*/
         }
 
         if (OVRInput.Get(OVRInput.RawButton.LHandTrigger))
@@ -47,35 +52,34 @@ public class Bow : MonoBehaviour
             transform.position = L_HandPos.position;
             transform.rotation = L_HandPos.rotation;
         }
-        
-        if (OVRInput.GetUp(OVRInput.RawButton.RIndexTrigger))
-        {
-            KaRiArrow.SetActive(false);
-        }
     }
 
     void OnTriggerStay(Collider collider)
     {
-
-        if (collider.gameObject.tag == "RHand" && OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+        if (collider.gameObject.tag == "RHand" && OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) && ArrowInst)
         {
             KaRiArrow.SetActive(true);
-            
+            HandCheck = true;
+
+
         }
     }
 
     void ArrowInstantiate()
     {
-        //Debug.Log("インスタント");
-
         Instantiate(
             Arrow,
             KaRiArrow.transform.position,
             KaRiArrow.transform.rotation);
 
-        TimeS = 0;
-        ArrowInst = false;
-    }
         
+        /*
+        var bulletInstance = Instantiate<GameObject>(Arrow, KaRiArrow.transform.position, KaRiArrow.transform.rotation);
+        bulletInstance.GetComponent<Rigidbody>().AddForce(bulletInstance.transform.forward * ArrowPower);
+        Destroy(bulletInstance, 10f);*/
+
+        TimeS = 0;
+        HandCheck = false;
+    }  
 }
 

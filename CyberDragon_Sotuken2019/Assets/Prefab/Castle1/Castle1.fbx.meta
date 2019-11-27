@@ -4,11 +4,33 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Castle1:polySurface1
+    100004: Ground:pCube1
+    100006: Kaidan:polySurface1
+    100008: pasted__pasted__pasted__pCube2
     400000: //RootNode
+    400002: Castle1:polySurface1
+    400004: Ground:pCube1
+    400006: Kaidan:polySurface1
+    400008: pasted__pasted__pasted__pCube2
     2100000: lambert14
+    2100002: lambert1
+    2100004: lambert22
+    2100006: lambert23
     2300000: //RootNode
+    2300002: Castle1:polySurface1
+    2300004: Ground:pCube1
+    2300006: Kaidan:polySurface1
+    2300008: pasted__pasted__pasted__pCube2
     3300000: //RootNode
+    3300002: Castle1:polySurface1
+    3300004: Ground:pCube1
+    3300006: Kaidan:polySurface1
+    3300008: pasted__pasted__pasted__pCube2
     4300000: Castle1:polySurface1
+    4300002: Ground:pCube1
+    4300004: pasted__pasted__pasted__pCube2
+    4300006: Kaidan:polySurface1
   externalObjects: {}
   materials:
     importMaterials: 1

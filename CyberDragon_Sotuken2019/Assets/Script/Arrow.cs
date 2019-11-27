@@ -7,24 +7,21 @@ public class Arrow : MonoBehaviour
 {
     
     Rigidbody Arrow_Rig;　　　　　　　//オブジェクトのリジットボディを取る
-    public float speed;　　　　　 //矢の弾速、
-    public GameObject effect = null;  //エフェクトを入れる箱、プレファブ化すると消えるので多分意味ない
+    float ArrowPower;　　　　　            //矢の弾速、
     private AudioSource[] sources;    //SE
 
 
-   
-    private void Start()
+
+
+    private void Awake()
     {
         Arrow_Rig = this.GetComponent<Rigidbody>();
         sources = gameObject.GetComponents<AudioSource>();
-        sources[0].Play();
-
-        SearchPOS();
     }
-    
-    void Update()
+
+    private void Start()
     {
-       
+        SearchPOS();
     }
 
     void SearchPOS()
@@ -33,15 +30,17 @@ public class Arrow : MonoBehaviour
         GameObject RhandPas = GameObject.Find("RHandPos");
         Vector3 LHP = LhandPas.transform.position;
         Vector3 RHP = RhandPas.transform.position;
-        speed = Vector3.Distance(LHP, RHP);
+        ArrowPower = Vector3.Distance(LHP, RHP);
 
-        speed /=  3000;
+        //ArrowPower /= 3000f;
+        Debug.Log(ArrowPower);
         SSS();
     }
 
     void SSS()
     {
-        Arrow_Rig.AddForce(transform.forward * speed);
+        Arrow_Rig.AddForce(transform.forward * (ArrowPower / 5000f));
+        sources[0].Play();
         Destroy(this.gameObject, 10f);
     }
 
@@ -52,5 +51,10 @@ public class Arrow : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        /*
+        if (collision.gameObject.tag == "OBJ")
+        {
+            Arrow_Rig.isKinematic = true;
+        }*/
     }
 }
